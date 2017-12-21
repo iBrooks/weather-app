@@ -1,8 +1,8 @@
 import './main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Parent from './components/Parent'
+import App from './components/App'
 ReactDOM.render(
-  <Parent />,
+  <App />,
   document.getElementById('app')
 );
