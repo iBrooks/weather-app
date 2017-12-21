@@ -5,6 +5,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.handleChange = this.handleChange.bind(this)
+    this.getWeather = this.getWeather.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.verifyZip = this.verifyZip.bind(this)
     this.getLoc = this.getLoc.bind(this)
@@ -50,13 +51,34 @@ class App extends Component {
         lat: `${promise.lat}`,
         lng: `${promise.lng}`
       })
+      this.getWeather()
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+  getWeather(){
+    let fetchUrl = `https://api.darksky.net/forecast/${apiKeys.darkSky}/${this.state.lat},${this.state.lng}`
+    fetch(fetchUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw Error(response.statusText)
+      }
+    return response
+    })
+    .then(response =>{
+      let promise = response.json()
+      return promise
+    })
+    .then(data =>{
+      debugger
     })
     .catch(error => {
       console.log(error)
     })
   }
   render(){
-    
+
     return(
       <div>
       <form onSubmit={this.handleSubmit}>
